@@ -209,6 +209,11 @@ namespace Echoes
         public DataGridViewCellStyle alternatingCellStyle = new DataGridViewCellStyle();
         public DataGridViewCellStyle highlightedCellStyle = new DataGridViewCellStyle();
 
+        //Abraham Moruri : abummoja3@gmail.com
+        string exeDir = AppDomain.CurrentDomain.BaseDirectory;
+        string m3uPath;
+        List<Track> foundTracks = new List<Track>();
+
         //                                        0      1         2        3          4         5            6        7        8         9         10             11           12         13        14        15             16
         readonly string[] COLUMN_PROPERTIES = { "num", "title", "artist", "length", "album", "listened", "filename", "year", "genre", "comment", "bitrate", "trackNumber", "lastOpened", "size", "format", "trueBitrate", "timesListened" };
         readonly string[] COLUMN_HEADERS = { "#", "Title", "Artist", "Length", "Album", "Listened", "File", "Year", "Genre", "Comment", "Bitrate", "Track #", "Last opened", "Size", "Format", "True Bitrate", "Times listened" };
@@ -233,6 +238,9 @@ namespace Echoes
             new ToolTip().SetToolTip(optionsBtn, "Options");
             new ToolTip().SetToolTip(repeatBtn, "Loop (none/list/track)");
             new ToolTip().SetToolTip(shuffleBtn, "Shuffle");
+            new ToolTip().SetToolTip(playBtn, "Play");
+            new ToolTip().SetToolTip(fwdBtn, "Fast Forward");
+            new ToolTip().SetToolTip(rewBtn, "Rewind");
 
             theHandle = Handle;
 
@@ -263,8 +271,82 @@ namespace Echoes
             SetColors();
             LoadPlaylistDb();
             StartupLoadProcedure();
+            CheckAndCreateDefaultM3U();
         }
 
+        public List<string> GetAllAudioFiles(string dir)
+        {
+            var audioFiles = Directory.EnumerateFiles(dir, "*", SearchOption.AllDirectories).Where(file => supportedAudioTypes.Contains(Path.GetExtension(file).ToLower())).ToList();
+            return audioFiles;
+        }
+        public async Task<List<string>>GetAudioFilesAsync(string dirPath)
+        {
+            return await Task.Run(() => GetAllAudioFiles(dirPath));
+        }
+        private async void mLoader()
+        {
+            showNotification("Loading Media Files From System");
+            try
+            {
+                List<string> audioFiles = await GetAudioFilesAsync(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile));
+                
+                //update list view
+                foreach(string g in audioFiles)
+                {   //tell me what it found
+                    //add to playlist.
+                    Track t = new Track(g, Path.GetFileNameWithoutExtension(g));
+                    CopyTrackToPlaylist(t, m3uPath);
+                    foundTracks.Add(t);
+                    Console.WriteLine("ABU: FOUND "+g);
+                }
+                ExportM3u(m3uPath, foundTracks);
+            }
+            catch(Exception ex)
+            {
+                showNotification("Loader Err: " + ex.Message);
+            }
+            finally
+            {
+                if (!knownPlaylists.Contains(m3uPath))
+                {
+                    knownPlaylists.Add(m3uPath);
+                }
+                //update listview or something
+            }
+        }
+        //check if default playlist exists and init it
+        private void CheckAndCreateDefaultM3U()
+        {
+            m3uPath = Path.Combine(exeDir, "default.m3u");
+            if (!File.Exists(m3uPath))
+            {//this proc creates the m3u since it did not exist and adds files to it in 'mLoader()'
+                try
+                {
+                    File.Create(m3uPath).Dispose();//dispose immediately to release handle.
+                    showNotification("Created Default Media Library...");
+                    knownPlaylists.Add(m3uPath);
+                    try
+                    {
+                        mLoader();
+                    }
+                    catch (Exception e)
+                    {
+                        showNotification("ERR when trying mLoader " + e.Message);
+                    }
+                }
+                catch(Exception ex)
+                {
+                    showNotification("ERR: Failed to create default library! "+ex.Message);
+                }
+            }
+            else
+            {
+                //default db exists load it.
+                knownPlaylists.Add(m3uPath);
+                showNotification("Found Default Media Library.");
+            }
+            
+        }
         void AddHeaderContextMenu()
         {
             ContextMenuStrip headerContextMenu = new ContextMenuStrip();
@@ -273,6 +355,8 @@ namespace Echoes
                 ToolStripMenuItem mi = new ToolStripMenuItem(COLUMN_HEADERS[i]);
                 if (currentColumnInfo.Where(x => x.id == i).Count() > 0) mi.Checked = true;
                 mi.Name = i + "";
+                showNotification("Setting Up Context Menu: " + mi.Name);
+                //notificationLabel.Text = ;
                 mi.Click += (theSender, eventArgs) =>
                 {
                     if (mi.Checked)
@@ -299,6 +383,8 @@ namespace Echoes
             {
                 clmn.HeaderCell.ContextMenuStrip = headerContextMenu;
             }
+            //notificationLabel.Text = "Finished Setting Up Menu";
+            showNotification("Finished Setting Up Menu");
         }
 
         public void RemoveEQ()
@@ -307,11 +393,25 @@ namespace Echoes
             {
                 Bass.BASS_ChannelRemoveFX(stream, i);
             }
+            showNotification("EQ Removed");
         }
 
+        private void showNotification(String s)
+        {
+            if (s != null)
+            {
+                //notificationLabel.Text = s;
+                notificationStatusLabel.Text = s;
+            }
+            else
+            {
+                //notificationLabel.Text = "Notification Error";
+                notificationStatusLabel.Text = "Notification Error!";
+            }
+        }
         public void DefineEQ()
         {
-            if (!eqEnabled) return;
+            if (!eqEnabled) showNotification("Failed to define EQ"); return;
             BASS_DX8_PARAMEQ eq = new BASS_DX8_PARAMEQ();
             _fxEQ[0] = Bass.BASS_ChannelSetFX(stream, BASSFXType.BASS_FX_DX8_PARAMEQ, 0);
             _fxEQ[1] = Bass.BASS_ChannelSetFX(stream, BASSFXType.BASS_FX_DX8_PARAMEQ, 0);
@@ -333,6 +433,7 @@ namespace Echoes
             {
                 UpdateEQ(i, eqGains[i]);
             }
+            showNotification("EQ Applied");
         }
 
         void UpdateEQ(int band, float gain)
@@ -342,7 +443,7 @@ namespace Echoes
             {
                 eq.fGain = gain;
                 Bass.BASS_FXSetParameters(_fxEQ[band], eq);
-            }
+            }showNotification("EQ Updated");
         }
 
         void kh_KeyDown(KeyEventArgs e)
@@ -381,6 +482,7 @@ namespace Echoes
                 else
                 {
                     MessageBox.Show("File type not supported.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    showNotification("ERROR: Unsupported File");
                 }
             }
         }
@@ -405,6 +507,7 @@ namespace Echoes
                 }
             }
             MessageBox.Show(foundFiles + "/" + missingTracks.Count + " missing tracks found." + Environment.NewLine + "Save the playlist.");
+            showNotification(foundFiles + "/" + missingTracks.Count + " missing tracks found." + Environment.NewLine + "Save the playlist.");
         }
 
         public void SetDefaultColors()
@@ -608,7 +711,8 @@ namespace Echoes
             }*/
             RepositionControls();
             DisplayTrackInfo(nowPlaying);
-            this.Refresh();
+            this.Refresh();showNotification("Font Updated");
+            //notificationLabel.Font = new Font(font1.FontFamily, font1.Style);
         }
 
         public void SetColors()
@@ -629,7 +733,7 @@ namespace Echoes
                     ((ModifiedControls.ModifiedComboBox)ctrl).HighlightColor = seekBarForeColor;
                 }
                 ctrl.ForeColor = controlForeColor;
-                ctrl.Refresh();
+                ctrl.Refresh();showNotification("successfuly colored: "+ctrl.Name +" : "+ ctrl.ForeColor.Name);
             }
             //dgv
             defaultCellStyle.BackColor = controlBackColor;
@@ -749,7 +853,7 @@ namespace Echoes
 
         public void UpdateCache()
         {
-            UpdateCache(playlist);
+            UpdateCache(playlist);showNotification("Cache Updated");
         }
 
         void SetListenedTime(Track track, int time)
@@ -767,15 +871,15 @@ namespace Echoes
                 LoadFiles(files);
                 return;
             }
-            //
+            //tag loader stuff ^
 
             var loadingPlaylist = new List<Track>();
             string lastList = null;
             foreach (string file in files)
-            {
+            {   showNotification("Updating Library");
                 if (supportedAudioTypes.Contains(Path.GetExtension(file).ToLower()))
                 {
-                    loadingPlaylist.Add(new Track(file, Path.GetFileName(file)));
+                    loadingPlaylist.Add(new Track(file, Path.GetFileName(file)));showNotification(Path.GetFileName(file) + " Added To Library");
                 }
                 else if (Path.GetExtension(file).ToLower() == ".m3u")
                 {
@@ -786,7 +890,7 @@ namespace Echoes
             if (loadingPlaylist.Count == 0)
             {
                 //there were no valid track files, load m3u if any
-                if (lastList != null) ImportM3u(lastList);
+                if (lastList != null) ImportM3u(lastList);showNotification("Loading Previous Playlist");
                 return;
             }
 
@@ -801,7 +905,7 @@ namespace Echoes
             else
             {
                 //in a created playlist, add tracks to it
-                loadingPlaylist.Reverse();
+                loadingPlaylist.Reverse();showNotification("Updating Playlist");
                 bool addDupes = false;
                 bool askToAddDupes = true;
                 foreach (Track t in loadingPlaylist)
@@ -810,11 +914,12 @@ namespace Echoes
                     {
                         if (askToAddDupes)
                         {
+                            showNotification("Add Duplicates?");
                             addDupes = MessageBox.Show("There are duplicates. Add them?", "Dupes", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation) == DialogResult.Yes;
                             askToAddDupes = false;
                             if (addDupes)
                             {
-                                playlist.Insert(0, t);
+                                playlist.Insert(0, t);showNotification("Added Duplicates");
                             }
                         }
                     }
@@ -838,6 +943,7 @@ namespace Echoes
 
         bool AskToQuitWorker()
         {
+            showNotification("Exit?");
             if (!tagsLoaderWorker.IsBusy) return true;
             if (MessageBox.Show("Tag loading in progress. Any loaded tags will not be saved if you quit. Do you wish to quit?", "Loading", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation) == DialogResult.No)
             {
@@ -857,6 +963,7 @@ namespace Echoes
 
         void StartupLoadProcedure()
         {
+            showNotification("Initializing Media Library...");
             string lastList = null;
             playlist = new List<Track>();
             foreach (string file in Program.filesToOpen)
@@ -887,11 +994,11 @@ namespace Echoes
         {
             if (Path.GetExtension(t.filename).ToLower() == ".m3u")
             {
-                ImportM3u(t.filename);
+                ImportM3u(t.filename);showNotification("Loading Playlist: " + t.filename);
             }
             else
             {
-                LoadAudio(t);
+                LoadAudio(t);showNotification("Loading File: " + t.filename);
             }
         }
 
@@ -1113,6 +1220,7 @@ namespace Echoes
 
         public void DeleteTrack(List<int> nums)
         {
+            //showNotification("Deleting Track "+new Track = GetTrackByNum(i).filename);
             if (!sortingAllowed) return;
             int lastInt = 0;
             if (displayedItems == ItemType.Track)
@@ -1121,7 +1229,7 @@ namespace Echoes
                 foreach (int i in nums)
                 {
                     Track toRemove = GetTrackByNum(i);
-                    playlist.Remove(toRemove);
+                    playlist.Remove(toRemove); showNotification("Removed: " + toRemove.filename);
                     lastInt = i;
                 }
                 RefreshPlaylistGrid();
@@ -1133,7 +1241,7 @@ namespace Echoes
                 foreach (int i in nums)
                 {
                     Track toRemove = GetTrackByNum(i);
-                    playlist.Remove(toRemove);
+                    playlist.Remove(toRemove);showNotification("Removed: " + toRemove.filename);
                     RemoveKnownPlaylist(toRemove.filename);
                     lastInt = i;
                 }
@@ -1156,7 +1264,7 @@ namespace Echoes
             }
             catch (Exception)
             {
-                return;
+                return;showNotification("Failed to load color scheme.");
             }
             if (xml.Root.Descendants().FirstOrDefault(x => x.Name == "colorSchemes") == null) return;
             XElement group = xml.Root.Element("colorSchemes");
@@ -1202,7 +1310,7 @@ namespace Echoes
             catch (Exception)
             {
                 SaveXmlConfig();
-                SaveXmlColorScheme(name);
+                SaveXmlColorScheme(name);showNotification("Saved Color Scheme: " + name);
                 return;
             }
             XElement group;
@@ -1608,6 +1716,7 @@ namespace Echoes
 
         private void Shuffle()
         {
+            showNotification("Shuffling...");
             if (!sortingAllowed) return;
             /*SortableBindingList<Track> froms = (SortableBindingList<Track>)dataGridView1.DataSource;
             ShuffleBindingList(froms);*/
@@ -1658,7 +1767,7 @@ namespace Echoes
                 Track newTrack = new Track(t[i].filename, t[i].title);
                 newTrack.length = t[i].length;
                 newTrack.artist = t[i].artist;
-                thePlaylist.Add(newTrack);
+                thePlaylist.Add(newTrack);showNotification("Added " + newTrack.filename);
             }
             thePlaylist.AddRange(playlistFromFile);
             FixPlaylistNumbers(thePlaylist);
@@ -1672,6 +1781,7 @@ namespace Echoes
 
         private void LoadPlaylistDb()
         {
+            showNotification("Loading Playlist Database");
             try
             {
                 knownPlaylists.Clear();
@@ -1687,11 +1797,12 @@ namespace Echoes
                 sr.Close();
                 sr.Dispose();
             }
-            catch (Exception) { }
+            catch (Exception) { showNotification("Failed To Load Playlist Database"); }
         }
 
         private void SavePlaylistDb()
         {
+            showNotification("Saving Playlist Database...");
             using (StreamWriter sw = new StreamWriter(playlistDbLocation))
             {
                 foreach (string s in knownPlaylists)
@@ -1712,6 +1823,7 @@ namespace Echoes
 
         private void RemoveKnownPlaylist(string filename)
         {
+            showNotification("Removing Playlist " + filename);
             if (knownPlaylists.Contains(filename))
             {
                 RemoveKnownPlaylist(knownPlaylists.IndexOf(filename));
@@ -1787,11 +1899,12 @@ namespace Echoes
                 catch (Exception w)
                 {
                     MessageBox.Show(w.ToString());
+                    showNotification("Error: " + w.Message);
                 }
             }
             catch (Exception a)
             {
-                MessageBox.Show(a.ToString());
+                MessageBox.Show(a.ToString()); showNotification("Error: " + a.Message);
             }
         }
 
@@ -1821,6 +1934,7 @@ namespace Echoes
             if (!File.Exists(filename))
             {
                 MessageBox.Show("File doesn't exist.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                showNotification("Error: No Such File At " + filename);
                 return;
             }
             if (tagsLoaderWorker.IsBusy)
@@ -1862,14 +1976,14 @@ namespace Echoes
                 if (tagsLoaderWorker.IsBusy) tagsLoaderWorker.CancelAsync();
                 else
                 {
-                    trackText.Text = "Loading...";
+                    trackText.Text = "Loading...";showNotification("Loading...");
                     tagsLoaderWorker.RunWorkerAsync();
                 }
             }
             catch (Exception e)
             {
                 MessageBox.Show(filename + " is invalid.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                Console.WriteLine(e.StackTrace);
+                Console.WriteLine(e.StackTrace);showNotification("Error: Invalid File "+Environment.NewLine+e.Message);
             }
         }
 
@@ -1877,7 +1991,7 @@ namespace Echoes
         {
             if (tagsLoaderWorker.IsBusy) return;
             reloadTagsFlag = true;
-            tagsLoaderWorker.RunWorkerAsync();
+            tagsLoaderWorker.RunWorkerAsync();showNotification("Reloading Tags...");
         }
 
         private void AdvancePlayer()
@@ -1885,7 +1999,7 @@ namespace Echoes
             try
             {
                 StopPlayer();
-                DataGridViewRow currentRow = FindTrackRow(nowPlaying);
+                DataGridViewRow currentRow = FindTrackRow(nowPlaying.num);
                 if (currentRow.Index >= trackGrid.Rows.Count - 1 && repeat == 0) return;
                 else
                 {
@@ -2015,6 +2129,7 @@ namespace Echoes
 
         public void Normalize()
         {
+            showNotification("Attempting Normalization...");
             if (DSPGain != null && DSPGain.IsAssigned) DSPGain.Stop();
             if (wf == null || !wf.IsRendered) return;
             float peak = 0;
@@ -2028,11 +2143,13 @@ namespace Echoes
                     DSPGain.Gain = normGain;
                     DSPGain.Start();
                     Console.WriteLine(" | Applied gain of " + (normGain));
+                    showNotification("Applied gain of " + (normGain));
                 }
                 else
                 {
                     normGain = 0;
                     Console.WriteLine(" | Gain not applied");
+                    showNotification("Gain Not Applied!");
                 }
             }
             catch (Exception) { }
@@ -2089,6 +2206,7 @@ namespace Echoes
 
         void SetLooping()
         {
+            showNotification("Loop Mode");
             if (!streamLoaded) return;
             if (repeat > 1)
             {
@@ -2105,10 +2223,11 @@ namespace Echoes
 
         public bool InitMidi()
         {
+            showNotification("Initializing Midi...");
             //if (midiFonts != null) return true;
             if (!File.Exists(midiSfLocation))
             {
-                if (MessageBox.Show("To play Midi files, you need a soundfont. Do you wanna specify a soundfont file to use?", "Midi", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation) == DialogResult.Yes)
+                if (MessageBox.Show("To play Midi files, you need a soundfont. Do you want to specify a soundfont file to use?", "Midi", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation) == DialogResult.Yes)
                 {
                     OpenFileDialog dlg = new OpenFileDialog();
                     dlg.Title = "Midi soundfont";
@@ -2184,6 +2303,7 @@ namespace Echoes
 
         string CreateNewPlaylist()
         {
+            showNotification("Saving Playlist...");
             SaveFileDialog dlg = new SaveFileDialog();
             dlg.Title = "Save Playlist";
             dlg.Filter = "M3U playlists (*.m3u)|*.m3u";
@@ -2199,6 +2319,7 @@ namespace Echoes
 
         private void ExportPlaylist()
         {
+            showNotification("Exporting Playlist...");
             if (displayedItems == ItemType.Playlist) return;
             SaveFileDialog dlg = new SaveFileDialog();
             dlg.Title = "Save Playlist";
@@ -2214,12 +2335,13 @@ namespace Echoes
             }
             dlg.Dispose();
         }
-
+        //Updated to enable multiple file selection.
         private void ChooseFile()
         {
             OpenFileDialog dlg = new OpenFileDialog();
             dlg.Title = "Open File";
             dlg.Filter = "Supported files|";
+            dlg.Multiselect = true;
             foreach (string s in supportedAudioTypes)
             {
                 dlg.Filter += "*" + s + ";";
@@ -2227,7 +2349,15 @@ namespace Echoes
             dlg.Filter += "*.m3u;";
             if (dlg.ShowDialog(this) == DialogResult.OK)
             {
-                LoadFiles(new List<string> { dlg.FileName.ToString() });
+                List<string> selectedFiles = new List<string>();
+                foreach(string str in dlg.FileNames)
+                {
+                    selectedFiles.Add(str);
+                }
+                LoadFiles(selectedFiles);
+                //the code commented was alone in this if block, so incase it breaks we come back here.
+                //LoadFiles(new List<string> { dlg.FileName.ToString() });
+
             }
             dlg.Dispose();
         }
@@ -2375,6 +2505,7 @@ namespace Echoes
             try { SaveXmlConfig(); }
             catch (Exception zx)
             {
+                showNotification("Error! "+zx.Message);
                 MessageBox.Show(zx.ToString());
             }
             FlushTimeListened(nowPlaying);
@@ -2744,7 +2875,7 @@ namespace Echoes
 
         void CopySelectedToClipboard()
         {
-
+            showNotification("Copied to clipboard!");
             StringCollection paths = new StringCollection();
             foreach (DataGridViewRow row in trackGrid.Rows)
             {
@@ -3333,7 +3464,8 @@ namespace Echoes
             {
                 DialogResult result = fbd.ShowDialog();
                 if (result == DialogResult.OK && !string.IsNullOrWhiteSpace(fbd.SelectedPath))
-                {
+                { 
+                    showNotification("Sync In Progress...");
                     if (Exporter.inProgress) MessageBox.Show("Sync already in progress. Wait for it to finish.");
                     else
                     {
@@ -3613,6 +3745,7 @@ namespace Echoes
 
         void SavePlaylist()
         {
+            showNotification("Saving Playlist...");
             if (!File.Exists(currentPlaylist))
             {
                 ExportPlaylist();
@@ -3620,7 +3753,7 @@ namespace Echoes
             }
             ExportM3u(currentPlaylist, playlist.OrderBy(x => x.num).ToList());
             System.Media.SystemSounds.Exclamation.Play();
-            playlistChanged = false;
+            playlistChanged = false;showNotification("Was Playlist Changed? " + playlistChanged);
         }
 
         private void modifiedButton1_Click(object sender, EventArgs e)
@@ -4139,7 +4272,7 @@ namespace Echoes
             }
             else
             {
-                Console.WriteLine("Normalizing of " + toNormalize.title + " cancelled.");
+                Console.WriteLine("Normalizing of " + toNormalize.title + " cancelled.");showNotification("Normalizing of " + toNormalize.title + " cancelled.");
             }
             volumeBar.Refresh();
         }
@@ -4156,7 +4289,7 @@ namespace Echoes
 
         private void echoesLogo_MouseEnter(object sender, EventArgs e)
         {
-            echoesLogo.BackgroundImage = LoadImage("echoesLogoWhite");
+            echoesLogo.BackgroundImage = LoadImage("echoesLogoWhite");showNotification("Echoes Music Player.");
         }
 
         private void Echoes_Enter(object sender, EventArgs e)
@@ -4211,8 +4344,14 @@ namespace Echoes
             }
         }
 
+        private void openAudioFile_MenuItemClicked(object sender, EventArgs e)
+        {
+            ChooseFile();
+        }
+
         public void LoadAudio(Track t)
         {
+            showNotification("Loading...");
             if (loadTrackWorker.IsBusy)
             {
                 trackToReload = t;

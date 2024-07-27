@@ -55,6 +55,26 @@ namespace Echoes
             this.normalizerWorker = new System.ComponentModel.BackgroundWorker();
             this.playlistInfoTxt = new System.Windows.Forms.Label();
             this.loadTrackWorker = new System.ComponentModel.BackgroundWorker();
+            this.helpProvider1 = new System.Windows.Forms.HelpProvider();
+            this.menuBar = new System.Windows.Forms.MenuStrip();
+            this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.openPlaylistToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.openAudioFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.openMultipleFilesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.saveCurrentPlaylistToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.recentFilesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.updateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.equalizerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.aboutEchoesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.changeLogToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.bugReportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.viewSourceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.notificationStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.eqButton = new ModifiedControls.ModifiedButton();
             this.saveButton = new ModifiedControls.ModifiedButton();
             this.playlistSelectorCombo = new ModifiedControls.ModifiedComboBox();
@@ -74,6 +94,8 @@ namespace Echoes
             ((System.ComponentModel.ISupportInitialize)(this.shuffleBtn)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.optionsBtn)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repeatBtn)).BeginInit();
+            this.menuBar.SuspendLayout();
+            this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // trackGrid
@@ -85,7 +107,8 @@ namespace Echoes
             this.trackGrid.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
             this.trackGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.trackGrid.EnableHeadersVisualStyles = false;
-            this.trackGrid.Location = new System.Drawing.Point(10, 164);
+            this.trackGrid.Location = new System.Drawing.Point(9, 220);
+            this.trackGrid.Margin = new System.Windows.Forms.Padding(3, 3, 3, 12);
             this.trackGrid.Name = "trackGrid";
             this.trackGrid.ReadOnly = true;
             this.trackGrid.RowHeadersVisible = false;
@@ -112,7 +135,7 @@ namespace Echoes
             this.trackText.DetectUrls = false;
             this.trackText.Font = new System.Drawing.Font("Courier New", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.trackText.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
-            this.trackText.Location = new System.Drawing.Point(10, 75);
+            this.trackText.Location = new System.Drawing.Point(9, 112);
             this.trackText.Multiline = false;
             this.trackText.Name = "trackText";
             this.trackText.ReadOnly = true;
@@ -138,7 +161,7 @@ namespace Echoes
             // 
             this.searchBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.searchBox.Font = new System.Drawing.Font("Courier New", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.searchBox.Location = new System.Drawing.Point(11, 139);
+            this.searchBox.Location = new System.Drawing.Point(10, 174);
             this.searchBox.Name = "searchBox";
             this.searchBox.Size = new System.Drawing.Size(178, 20);
             this.searchBox.TabIndex = 21;
@@ -156,7 +179,7 @@ namespace Echoes
             0,
             0,
             65536});
-            this.transposeChangerNum.Location = new System.Drawing.Point(539, 10);
+            this.transposeChangerNum.Location = new System.Drawing.Point(538, 46);
             this.transposeChangerNum.Maximum = new decimal(new int[] {
             12,
             0,
@@ -177,7 +200,7 @@ namespace Echoes
             this.transposeTxt.AutoSize = true;
             this.transposeTxt.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.transposeTxt.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
-            this.transposeTxt.Location = new System.Drawing.Point(445, 10);
+            this.transposeTxt.Location = new System.Drawing.Point(444, 46);
             this.transposeTxt.Name = "transposeTxt";
             this.transposeTxt.Size = new System.Drawing.Size(77, 15);
             this.transposeTxt.TabIndex = 23;
@@ -189,7 +212,7 @@ namespace Echoes
             this.fwdBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.fwdBtn.Image = global::Echoes.Properties.Resources.forward1;
             this.fwdBtn.InitialImage = null;
-            this.fwdBtn.Location = new System.Drawing.Point(241, 10);
+            this.fwdBtn.Location = new System.Drawing.Point(240, 46);
             this.fwdBtn.Name = "fwdBtn";
             this.fwdBtn.Size = new System.Drawing.Size(60, 60);
             this.fwdBtn.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -206,7 +229,7 @@ namespace Echoes
             this.rewBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.rewBtn.Image = global::Echoes.Properties.Resources.rewind1;
             this.rewBtn.InitialImage = null;
-            this.rewBtn.Location = new System.Drawing.Point(208, 10);
+            this.rewBtn.Location = new System.Drawing.Point(207, 46);
             this.rewBtn.Name = "rewBtn";
             this.rewBtn.Size = new System.Drawing.Size(26, 60);
             this.rewBtn.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -223,7 +246,7 @@ namespace Echoes
             this.backBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.backBtn.Image = global::Echoes.Properties.Resources.back1;
             this.backBtn.InitialImage = null;
-            this.backBtn.Location = new System.Drawing.Point(142, 10);
+            this.backBtn.Location = new System.Drawing.Point(141, 46);
             this.backBtn.Name = "backBtn";
             this.backBtn.Size = new System.Drawing.Size(60, 60);
             this.backBtn.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -240,7 +263,7 @@ namespace Echoes
             this.stopBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.stopBtn.Image = global::Echoes.Properties.Resources.stop1;
             this.stopBtn.InitialImage = null;
-            this.stopBtn.Location = new System.Drawing.Point(76, 10);
+            this.stopBtn.Location = new System.Drawing.Point(75, 46);
             this.stopBtn.Name = "stopBtn";
             this.stopBtn.Size = new System.Drawing.Size(60, 60);
             this.stopBtn.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -257,7 +280,7 @@ namespace Echoes
             this.playBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.playBtn.Image = global::Echoes.Properties.Resources.play1;
             this.playBtn.InitialImage = null;
-            this.playBtn.Location = new System.Drawing.Point(10, 10);
+            this.playBtn.Location = new System.Drawing.Point(9, 46);
             this.playBtn.Name = "playBtn";
             this.playBtn.Size = new System.Drawing.Size(60, 60);
             this.playBtn.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -270,7 +293,7 @@ namespace Echoes
             // 
             // visualsPicture
             // 
-            this.visualsPicture.Location = new System.Drawing.Point(595, 10);
+            this.visualsPicture.Location = new System.Drawing.Point(594, 46);
             this.visualsPicture.Name = "visualsPicture";
             this.visualsPicture.Size = new System.Drawing.Size(397, 60);
             this.visualsPicture.TabIndex = 27;
@@ -281,7 +304,7 @@ namespace Echoes
             // 
             this.echoesLogo.BackgroundImage = global::Echoes.Properties.Resources.echoesLogoWhiteDim;
             this.echoesLogo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.echoesLogo.Location = new System.Drawing.Point(998, 10);
+            this.echoesLogo.Location = new System.Drawing.Point(997, 46);
             this.echoesLogo.Name = "echoesLogo";
             this.echoesLogo.Size = new System.Drawing.Size(60, 60);
             this.echoesLogo.TabIndex = 14;
@@ -296,7 +319,7 @@ namespace Echoes
             this.openBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.openBtn.Image = global::Echoes.Properties.Resources.import1;
             this.openBtn.InitialImage = null;
-            this.openBtn.Location = new System.Drawing.Point(307, 10);
+            this.openBtn.Location = new System.Drawing.Point(306, 46);
             this.openBtn.Name = "openBtn";
             this.openBtn.Size = new System.Drawing.Size(30, 30);
             this.openBtn.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -313,7 +336,7 @@ namespace Echoes
             this.exportBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.exportBtn.Image = global::Echoes.Properties.Resources.export1;
             this.exportBtn.InitialImage = null;
-            this.exportBtn.Location = new System.Drawing.Point(307, 39);
+            this.exportBtn.Location = new System.Drawing.Point(306, 75);
             this.exportBtn.Name = "exportBtn";
             this.exportBtn.Size = new System.Drawing.Size(30, 30);
             this.exportBtn.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -330,7 +353,7 @@ namespace Echoes
             this.shuffleBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.shuffleBtn.Image = global::Echoes.Properties.Resources.shuffle1;
             this.shuffleBtn.InitialImage = null;
-            this.shuffleBtn.Location = new System.Drawing.Point(343, 10);
+            this.shuffleBtn.Location = new System.Drawing.Point(342, 46);
             this.shuffleBtn.Name = "shuffleBtn";
             this.shuffleBtn.Size = new System.Drawing.Size(30, 30);
             this.shuffleBtn.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -347,7 +370,7 @@ namespace Echoes
             this.optionsBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.optionsBtn.Image = global::Echoes.Properties.Resources.options1;
             this.optionsBtn.InitialImage = null;
-            this.optionsBtn.Location = new System.Drawing.Point(343, 39);
+            this.optionsBtn.Location = new System.Drawing.Point(342, 75);
             this.optionsBtn.Name = "optionsBtn";
             this.optionsBtn.Size = new System.Drawing.Size(30, 30);
             this.optionsBtn.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -364,7 +387,7 @@ namespace Echoes
             this.repeatBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.repeatBtn.Image = global::Echoes.Properties.Resources.repeatNone1;
             this.repeatBtn.InitialImage = null;
-            this.repeatBtn.Location = new System.Drawing.Point(379, 9);
+            this.repeatBtn.Location = new System.Drawing.Point(378, 45);
             this.repeatBtn.Name = "repeatBtn";
             this.repeatBtn.Size = new System.Drawing.Size(60, 60);
             this.repeatBtn.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -388,7 +411,7 @@ namespace Echoes
             this.playlistInfoTxt.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.playlistInfoTxt.Font = new System.Drawing.Font("Courier New", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.playlistInfoTxt.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
-            this.playlistInfoTxt.Location = new System.Drawing.Point(195, 141);
+            this.playlistInfoTxt.Location = new System.Drawing.Point(195, 176);
             this.playlistInfoTxt.Name = "playlistInfoTxt";
             this.playlistInfoTxt.Size = new System.Drawing.Size(544, 18);
             this.playlistInfoTxt.TabIndex = 43;
@@ -399,13 +422,157 @@ namespace Echoes
             this.loadTrackWorker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.loadTrackWorker_DoWork);
             this.loadTrackWorker.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.loadTrackWorker_RunWorkerCompleted);
             // 
+            // menuBar
+            // 
+            this.menuBar.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.menuBar.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.fileToolStripMenuItem,
+            this.optionsToolStripMenuItem,
+            this.helpToolStripMenuItem});
+            this.menuBar.Location = new System.Drawing.Point(0, 0);
+            this.menuBar.Name = "menuBar";
+            this.menuBar.Size = new System.Drawing.Size(1070, 24);
+            this.menuBar.TabIndex = 45;
+            this.menuBar.Text = "menuStrip1";
+            // 
+            // fileToolStripMenuItem
+            // 
+            this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.openPlaylistToolStripMenuItem,
+            this.openAudioFileToolStripMenuItem,
+            this.openMultipleFilesToolStripMenuItem,
+            this.saveCurrentPlaylistToolStripMenuItem,
+            this.recentFilesToolStripMenuItem,
+            this.exitToolStripMenuItem});
+            this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
+            this.fileToolStripMenuItem.Text = "File";
+            // 
+            // openPlaylistToolStripMenuItem
+            // 
+            this.openPlaylistToolStripMenuItem.Name = "openPlaylistToolStripMenuItem";
+            this.openPlaylistToolStripMenuItem.Size = new System.Drawing.Size(181, 22);
+            this.openPlaylistToolStripMenuItem.Text = "Open Playlist";
+            // 
+            // openAudioFileToolStripMenuItem
+            // 
+            this.openAudioFileToolStripMenuItem.Name = "openAudioFileToolStripMenuItem";
+            this.openAudioFileToolStripMenuItem.Size = new System.Drawing.Size(181, 22);
+            this.openAudioFileToolStripMenuItem.Text = "Open Audio File";
+            this.openAudioFileToolStripMenuItem.Click += new System.EventHandler(this.openAudioFile_MenuItemClicked);
+            // 
+            // openMultipleFilesToolStripMenuItem
+            // 
+            this.openMultipleFilesToolStripMenuItem.Name = "openMultipleFilesToolStripMenuItem";
+            this.openMultipleFilesToolStripMenuItem.Size = new System.Drawing.Size(181, 22);
+            this.openMultipleFilesToolStripMenuItem.Text = "Open Multiple Files";
+            // 
+            // saveCurrentPlaylistToolStripMenuItem
+            // 
+            this.saveCurrentPlaylistToolStripMenuItem.Name = "saveCurrentPlaylistToolStripMenuItem";
+            this.saveCurrentPlaylistToolStripMenuItem.Size = new System.Drawing.Size(181, 22);
+            this.saveCurrentPlaylistToolStripMenuItem.Text = "Save Current Playlist";
+            // 
+            // recentFilesToolStripMenuItem
+            // 
+            this.recentFilesToolStripMenuItem.Name = "recentFilesToolStripMenuItem";
+            this.recentFilesToolStripMenuItem.Size = new System.Drawing.Size(181, 22);
+            this.recentFilesToolStripMenuItem.Text = "Recent Files";
+            // 
+            // exitToolStripMenuItem
+            // 
+            this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(181, 22);
+            this.exitToolStripMenuItem.Text = "Exit";
+            // 
+            // optionsToolStripMenuItem
+            // 
+            this.optionsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.settingsToolStripMenuItem,
+            this.updateToolStripMenuItem,
+            this.equalizerToolStripMenuItem});
+            this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
+            this.optionsToolStripMenuItem.Size = new System.Drawing.Size(61, 20);
+            this.optionsToolStripMenuItem.Text = "Options";
+            // 
+            // settingsToolStripMenuItem
+            // 
+            this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
+            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(121, 22);
+            this.settingsToolStripMenuItem.Text = "Settings";
+            // 
+            // updateToolStripMenuItem
+            // 
+            this.updateToolStripMenuItem.Name = "updateToolStripMenuItem";
+            this.updateToolStripMenuItem.Size = new System.Drawing.Size(121, 22);
+            this.updateToolStripMenuItem.Text = "Update";
+            // 
+            // equalizerToolStripMenuItem
+            // 
+            this.equalizerToolStripMenuItem.Name = "equalizerToolStripMenuItem";
+            this.equalizerToolStripMenuItem.Size = new System.Drawing.Size(121, 22);
+            this.equalizerToolStripMenuItem.Text = "Equalizer";
+            // 
+            // helpToolStripMenuItem
+            // 
+            this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.aboutEchoesToolStripMenuItem,
+            this.changeLogToolStripMenuItem,
+            this.bugReportToolStripMenuItem,
+            this.viewSourceToolStripMenuItem});
+            this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
+            this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
+            this.helpToolStripMenuItem.Text = "Help";
+            // 
+            // aboutEchoesToolStripMenuItem
+            // 
+            this.aboutEchoesToolStripMenuItem.Name = "aboutEchoesToolStripMenuItem";
+            this.aboutEchoesToolStripMenuItem.Size = new System.Drawing.Size(147, 22);
+            this.aboutEchoesToolStripMenuItem.Text = "About Echoes";
+            // 
+            // changeLogToolStripMenuItem
+            // 
+            this.changeLogToolStripMenuItem.Name = "changeLogToolStripMenuItem";
+            this.changeLogToolStripMenuItem.Size = new System.Drawing.Size(147, 22);
+            this.changeLogToolStripMenuItem.Text = "ChangeLog";
+            // 
+            // bugReportToolStripMenuItem
+            // 
+            this.bugReportToolStripMenuItem.Name = "bugReportToolStripMenuItem";
+            this.bugReportToolStripMenuItem.Size = new System.Drawing.Size(147, 22);
+            this.bugReportToolStripMenuItem.Text = "Bug Report";
+            // 
+            // viewSourceToolStripMenuItem
+            // 
+            this.viewSourceToolStripMenuItem.Name = "viewSourceToolStripMenuItem";
+            this.viewSourceToolStripMenuItem.Size = new System.Drawing.Size(147, 22);
+            this.viewSourceToolStripMenuItem.Text = "View Source";
+            // 
+            // statusStrip1
+            // 
+            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.notificationStatusLabel});
+            this.statusStrip1.Location = new System.Drawing.Point(0, 627);
+            this.statusStrip1.Name = "statusStrip1";
+            this.statusStrip1.Size = new System.Drawing.Size(1070, 22);
+            this.statusStrip1.TabIndex = 47;
+            this.statusStrip1.Text = "statusStrip1";
+            // 
+            // notificationStatusLabel
+            // 
+            this.notificationStatusLabel.Name = "notificationStatusLabel";
+            this.notificationStatusLabel.Size = new System.Drawing.Size(57, 17);
+            this.notificationStatusLabel.Text = "Waiting...";
+            // 
             // eqButton
             // 
             this.eqButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            this.eqButton.Cursor = System.Windows.Forms.Cursors.No;
+            this.eqButton.Enabled = false;
             this.eqButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.eqButton.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.eqButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
-            this.eqButton.Location = new System.Drawing.Point(460, 40);
+            this.eqButton.Location = new System.Drawing.Point(459, 76);
             this.eqButton.Margin = new System.Windows.Forms.Padding(2);
             this.eqButton.Name = "eqButton";
             this.eqButton.Size = new System.Drawing.Size(38, 30);
@@ -420,7 +587,7 @@ namespace Echoes
             this.saveButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.saveButton.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.saveButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
-            this.saveButton.Location = new System.Drawing.Point(513, 40);
+            this.saveButton.Location = new System.Drawing.Point(512, 76);
             this.saveButton.Margin = new System.Windows.Forms.Padding(2);
             this.saveButton.Name = "saveButton";
             this.saveButton.Size = new System.Drawing.Size(76, 30);
@@ -439,7 +606,7 @@ namespace Echoes
             this.playlistSelectorCombo.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
             this.playlistSelectorCombo.FormattingEnabled = true;
             this.playlistSelectorCombo.HighlightColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
-            this.playlistSelectorCombo.Location = new System.Drawing.Point(745, 138);
+            this.playlistSelectorCombo.Location = new System.Drawing.Point(745, 173);
             this.playlistSelectorCombo.Name = "playlistSelectorCombo";
             this.playlistSelectorCombo.Size = new System.Drawing.Size(156, 21);
             this.playlistSelectorCombo.TabIndex = 15;
@@ -449,7 +616,7 @@ namespace Echoes
             // volumeBar
             // 
             this.volumeBar.BackColor = System.Drawing.SystemColors.Control;
-            this.volumeBar.Location = new System.Drawing.Point(907, 138);
+            this.volumeBar.Location = new System.Drawing.Point(907, 172);
             this.volumeBar.Maximum = 300;
             this.volumeBar.Name = "volumeBar";
             this.volumeBar.Size = new System.Drawing.Size(150, 22);
@@ -460,7 +627,7 @@ namespace Echoes
             // 
             // seekBar
             // 
-            this.seekBar.Location = new System.Drawing.Point(10, 100);
+            this.seekBar.Location = new System.Drawing.Point(10, 136);
             this.seekBar.Name = "seekBar";
             this.seekBar.Size = new System.Drawing.Size(1047, 30);
             this.seekBar.TabIndex = 5;
@@ -475,7 +642,8 @@ namespace Echoes
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(24)))), ((int)(((byte)(24)))));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ClientSize = new System.Drawing.Size(1070, 562);
+            this.ClientSize = new System.Drawing.Size(1070, 649);
+            this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.eqButton);
             this.Controls.Add(this.playlistInfoTxt);
             this.Controls.Add(this.repeatBtn);
@@ -499,8 +667,10 @@ namespace Echoes
             this.Controls.Add(this.volumeBar);
             this.Controls.Add(this.seekBar);
             this.Controls.Add(this.trackGrid);
+            this.Controls.Add(this.menuBar);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.KeyPreview = true;
+            this.MainMenuStrip = this.menuBar;
             this.MinimumSize = new System.Drawing.Size(640, 300);
             this.Name = "Echoes";
             this.Text = "Echoes";
@@ -527,6 +697,10 @@ namespace Echoes
             ((System.ComponentModel.ISupportInitialize)(this.shuffleBtn)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.optionsBtn)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repeatBtn)).EndInit();
+            this.menuBar.ResumeLayout(false);
+            this.menuBar.PerformLayout();
+            this.statusStrip1.ResumeLayout(false);
+            this.statusStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -562,6 +736,26 @@ namespace Echoes
         public System.ComponentModel.BackgroundWorker normalizerWorker;
         private Label playlistInfoTxt;
         private System.ComponentModel.BackgroundWorker loadTrackWorker;
+        private HelpProvider helpProvider1;
+        private MenuStrip menuBar;
+        private ToolStripMenuItem fileToolStripMenuItem;
+        private ToolStripMenuItem openPlaylistToolStripMenuItem;
+        private ToolStripMenuItem openAudioFileToolStripMenuItem;
+        private ToolStripMenuItem openMultipleFilesToolStripMenuItem;
+        private ToolStripMenuItem saveCurrentPlaylistToolStripMenuItem;
+        private ToolStripMenuItem recentFilesToolStripMenuItem;
+        private ToolStripMenuItem exitToolStripMenuItem;
+        private ToolStripMenuItem optionsToolStripMenuItem;
+        private ToolStripMenuItem settingsToolStripMenuItem;
+        private ToolStripMenuItem updateToolStripMenuItem;
+        private ToolStripMenuItem helpToolStripMenuItem;
+        private ToolStripMenuItem aboutEchoesToolStripMenuItem;
+        private ToolStripMenuItem changeLogToolStripMenuItem;
+        private ToolStripMenuItem bugReportToolStripMenuItem;
+        private ToolStripMenuItem viewSourceToolStripMenuItem;
+        private ToolStripMenuItem equalizerToolStripMenuItem;
+        private StatusStrip statusStrip1;
+        private ToolStripStatusLabel notificationStatusLabel;
     }
 }
 

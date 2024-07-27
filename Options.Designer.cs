@@ -32,6 +32,7 @@ namespace Echoes
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Options));
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.generalPage = new System.Windows.Forms.TabPage();
+            this.reshuffleCheckbox = new System.Windows.Forms.CheckBox();
             this.normalizeCheckbox = new System.Windows.Forms.CheckBox();
             this.setDefaultsBtn = new ModifiedControls.ModifiedButton();
             this.font2ChangeBtn = new ModifiedControls.ModifiedButton();
@@ -80,7 +81,6 @@ namespace Echoes
             this.colorVisualsBtn = new ModifiedControls.ModifiedButton();
             this.colorVolBarBtn = new ModifiedControls.ModifiedButton();
             this.colorSeekBtn = new ModifiedControls.ModifiedButton();
-            this.reshuffleCheckbox = new System.Windows.Forms.CheckBox();
             this.tabControl1.SuspendLayout();
             this.generalPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.fontSizePercentTrack)).BeginInit();
@@ -135,6 +135,18 @@ namespace Echoes
             this.generalPage.Size = new System.Drawing.Size(434, 236);
             this.generalPage.TabIndex = 0;
             this.generalPage.Text = "General";
+            // 
+            // reshuffleCheckbox
+            // 
+            this.reshuffleCheckbox.AutoSize = true;
+            this.reshuffleCheckbox.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.reshuffleCheckbox.Location = new System.Drawing.Point(5, 144);
+            this.reshuffleCheckbox.Name = "reshuffleCheckbox";
+            this.reshuffleCheckbox.Size = new System.Drawing.Size(118, 17);
+            this.reshuffleCheckbox.TabIndex = 36;
+            this.reshuffleCheckbox.Text = "Shuffle after list loop";
+            this.reshuffleCheckbox.UseVisualStyleBackColor = true;
+            this.reshuffleCheckbox.CheckedChanged += new System.EventHandler(this.reshuffleCheckbox_CheckedChanged);
             // 
             // normalizeCheckbox
             // 
@@ -515,7 +527,7 @@ namespace Echoes
             // 
             this.removeHotkeyBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
             this.removeHotkeyBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.removeHotkeyBtn.Font = new System.Drawing.Font("White Rabbit", 8.249999F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.removeHotkeyBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.249999F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.removeHotkeyBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
             this.removeHotkeyBtn.Location = new System.Drawing.Point(33, 2);
             this.removeHotkeyBtn.Margin = new System.Windows.Forms.Padding(2);
@@ -530,7 +542,7 @@ namespace Echoes
             // 
             this.addHotkeyBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
             this.addHotkeyBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.addHotkeyBtn.Font = new System.Drawing.Font("White Rabbit", 8.249999F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.addHotkeyBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.249999F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.addHotkeyBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
             this.addHotkeyBtn.Location = new System.Drawing.Point(5, 2);
             this.addHotkeyBtn.Margin = new System.Windows.Forms.Padding(2);
@@ -571,7 +583,7 @@ namespace Echoes
             // 
             this.addColorSchemeBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
             this.addColorSchemeBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.addColorSchemeBtn.Font = new System.Drawing.Font("White Rabbit", 8.249999F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.addColorSchemeBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.249999F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.addColorSchemeBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
             this.addColorSchemeBtn.Location = new System.Drawing.Point(330, 206);
             this.addColorSchemeBtn.Margin = new System.Windows.Forms.Padding(2);
@@ -767,18 +779,6 @@ namespace Echoes
             this.colorSeekBtn.UseVisualStyleBackColor = true;
             this.colorSeekBtn.Click += new System.EventHandler(this.colorSeekBtn_Click);
             // 
-            // reshuffleCheckbox
-            // 
-            this.reshuffleCheckbox.AutoSize = true;
-            this.reshuffleCheckbox.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.reshuffleCheckbox.Location = new System.Drawing.Point(5, 144);
-            this.reshuffleCheckbox.Name = "reshuffleCheckbox";
-            this.reshuffleCheckbox.Size = new System.Drawing.Size(118, 17);
-            this.reshuffleCheckbox.TabIndex = 36;
-            this.reshuffleCheckbox.Text = "Shuffle after list loop";
-            this.reshuffleCheckbox.UseVisualStyleBackColor = true;
-            this.reshuffleCheckbox.CheckedChanged += new System.EventHandler(this.reshuffleCheckbox_CheckedChanged);
-            // 
             // Options
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -787,6 +787,7 @@ namespace Echoes
             this.Controls.Add(this.tabControl1);
             this.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
             this.Name = "Options";
             this.Text = "Options";
             this.tabControl1.ResumeLayout(false);

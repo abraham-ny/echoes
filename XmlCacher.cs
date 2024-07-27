@@ -203,7 +203,7 @@ namespace Echoes
                 {
                     backupFilename=Path.ChangeExtension(filename, "bak");
                     if (File.Exists(backupFilename)) File.Delete(backupFilename);
-                    File.Move(filename, backupFilename);
+                    try { File.Move(filename, backupFilename); }catch(Exception ex) { MessageBox.Show("ERR: " + ex.Message, "Moving"); }
                     xml.Save(filename);
                 }
             }

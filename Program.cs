@@ -125,7 +125,8 @@ namespace Echoes
             }
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            mainWindow = new Echoes();
+            //TO-DO: Add "new Ui" window and let user decide what to launch on this part. 'NewEchoes()' 
+            mainWindow = new Echoes();//launches the default echoes player.
             Application.Run(mainWindow);
         }
     }

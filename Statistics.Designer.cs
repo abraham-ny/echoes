@@ -31,23 +31,23 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Statistics));
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.searchBoxTrack = new System.Windows.Forms.TextBox();
             this.topTracksGrid = new System.Windows.Forms.DataGridView();
             this.num = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.name = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.listened = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.searchBoxArtist = new System.Windows.Forms.TextBox();
             this.topArtistsGrid = new System.Windows.Forms.DataGridView();
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.searchBoxAlbum = new System.Windows.Forms.TextBox();
             this.topAlbumsGrid = new System.Windows.Forms.DataGridView();
             this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.searchBoxTrack = new System.Windows.Forms.TextBox();
-            this.searchBoxArtist = new System.Windows.Forms.TextBox();
-            this.searchBoxAlbum = new System.Windows.Forms.TextBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.topTracksGrid)).BeginInit();
@@ -83,6 +83,17 @@
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Top tracks";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // searchBoxTrack
+            // 
+            this.searchBoxTrack.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.searchBoxTrack.Dock = System.Windows.Forms.DockStyle.Top;
+            this.searchBoxTrack.Font = new System.Drawing.Font("Courier New", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.searchBoxTrack.Location = new System.Drawing.Point(3, 3);
+            this.searchBoxTrack.Name = "searchBoxTrack";
+            this.searchBoxTrack.Size = new System.Drawing.Size(605, 20);
+            this.searchBoxTrack.TabIndex = 22;
+            this.searchBoxTrack.TextChanged += new System.EventHandler(this.searchBoxTextChanged);
             // 
             // topTracksGrid
             // 
@@ -141,6 +152,17 @@
             this.tabPage2.Text = "Top artists";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
+            // searchBoxArtist
+            // 
+            this.searchBoxArtist.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.searchBoxArtist.Dock = System.Windows.Forms.DockStyle.Top;
+            this.searchBoxArtist.Font = new System.Drawing.Font("Courier New", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.searchBoxArtist.Location = new System.Drawing.Point(3, 3);
+            this.searchBoxArtist.Name = "searchBoxArtist";
+            this.searchBoxArtist.Size = new System.Drawing.Size(605, 20);
+            this.searchBoxArtist.TabIndex = 22;
+            this.searchBoxArtist.TextChanged += new System.EventHandler(this.searchBoxTextChanged);
+            // 
             // topArtistsGrid
             // 
             this.topArtistsGrid.AllowUserToAddRows = false;
@@ -198,6 +220,17 @@
             this.tabPage3.Text = "Top albums";
             this.tabPage3.UseVisualStyleBackColor = true;
             // 
+            // searchBoxAlbum
+            // 
+            this.searchBoxAlbum.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.searchBoxAlbum.Dock = System.Windows.Forms.DockStyle.Top;
+            this.searchBoxAlbum.Font = new System.Drawing.Font("Courier New", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.searchBoxAlbum.Location = new System.Drawing.Point(3, 3);
+            this.searchBoxAlbum.Name = "searchBoxAlbum";
+            this.searchBoxAlbum.Size = new System.Drawing.Size(605, 20);
+            this.searchBoxAlbum.TabIndex = 23;
+            this.searchBoxAlbum.TextChanged += new System.EventHandler(this.searchBoxTextChanged);
+            // 
             // topAlbumsGrid
             // 
             this.topAlbumsGrid.AllowUserToAddRows = false;
@@ -243,39 +276,6 @@
             this.dataGridViewTextBoxColumn6.ReadOnly = true;
             this.dataGridViewTextBoxColumn6.Width = 80;
             // 
-            // searchBoxTrack
-            // 
-            this.searchBoxTrack.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.searchBoxTrack.Dock = System.Windows.Forms.DockStyle.Top;
-            this.searchBoxTrack.Font = new System.Drawing.Font("Courier New", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.searchBoxTrack.Location = new System.Drawing.Point(3, 3);
-            this.searchBoxTrack.Name = "searchBoxTrack";
-            this.searchBoxTrack.Size = new System.Drawing.Size(605, 20);
-            this.searchBoxTrack.TabIndex = 22;
-            this.searchBoxTrack.TextChanged += new System.EventHandler(this.searchBoxTextChanged);
-            // 
-            // searchBoxArtist
-            // 
-            this.searchBoxArtist.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.searchBoxArtist.Dock = System.Windows.Forms.DockStyle.Top;
-            this.searchBoxArtist.Font = new System.Drawing.Font("Courier New", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.searchBoxArtist.Location = new System.Drawing.Point(3, 3);
-            this.searchBoxArtist.Name = "searchBoxArtist";
-            this.searchBoxArtist.Size = new System.Drawing.Size(605, 20);
-            this.searchBoxArtist.TabIndex = 22;
-            this.searchBoxArtist.TextChanged += new System.EventHandler(this.searchBoxTextChanged);
-            // 
-            // searchBoxAlbum
-            // 
-            this.searchBoxAlbum.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.searchBoxAlbum.Dock = System.Windows.Forms.DockStyle.Top;
-            this.searchBoxAlbum.Font = new System.Drawing.Font("Courier New", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.searchBoxAlbum.Location = new System.Drawing.Point(3, 3);
-            this.searchBoxAlbum.Name = "searchBoxAlbum";
-            this.searchBoxAlbum.Size = new System.Drawing.Size(605, 20);
-            this.searchBoxAlbum.TabIndex = 23;
-            this.searchBoxAlbum.TextChanged += new System.EventHandler(this.searchBoxTextChanged);
-            // 
             // Statistics
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -283,6 +283,7 @@
             this.ClientSize = new System.Drawing.Size(619, 392);
             this.Controls.Add(this.tabControl1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
             this.Name = "Statistics";
             this.Text = "Statistics";
             this.tabControl1.ResumeLayout(false);
