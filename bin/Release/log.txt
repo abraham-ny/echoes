@@ -1,0 +1,20 @@
+7/26/2024 11:48:43 PM: System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection.
+Parameter name: index
+   at System.Collections.ArrayList.get_Item(Int32 index)
+   at System.Windows.Forms.DataGridViewRowCollection.SharedRow(Int32 rowIndex)
+   at System.Windows.Forms.DataGridViewRowCollection.get_Item(Int32 index)
+   at Echoes.Echoes.PlayFirst() in C:\Users\Abummoja\Downloads\echoesmaster(cs-musicplayer)\Echoes.cs:line 2310
+   at Echoes.Echoes.Play() in C:\Users\Abummoja\Downloads\echoesmaster(cs-musicplayer)\Echoes.cs:line 2327
+   at Echoes.Echoes.button1_MouseUp(Object sender, MouseEventArgs e) in C:\Users\Abummoja\Downloads\echoesmaster(cs-musicplayer)\Echoes.cs:line 3757
+   at System.Windows.Forms.Control.OnMouseUp(MouseEventArgs e)
+   at System.Windows.Forms.Control.WmMouseUp(Message& m, MouseButtons button, Int32 clicks)
+   at System.Windows.Forms.Control.WndProc(Message& m)
+   at System.Windows.Forms.Control.ControlNativeWindow.OnMessage(Message& m)
+   at System.Windows.Forms.Control.ControlNativeWindow.WndProc(Message& m)
+   at System.Windows.Forms.NativeWindow.DebuggableCallback(IntPtr hWnd, Int32 msg, IntPtr wparam, IntPtr lparam)
+   at System.Windows.Forms.UnsafeNativeMethods.DispatchMessageW(MSG& msg)
+   at System.Windows.Forms.Application.ComponentManager.System.Windows.Forms.UnsafeNativeMethods.IMsoComponentManager.FPushMessageLoop(IntPtr dwComponentID, Int32 reason, Int32 pvLoopData)
+   at System.Windows.Forms.Application.ThreadContext.RunMessageLoopInner(Int32 reason, ApplicationContext context)
+   at System.Windows.Forms.Application.ThreadContext.RunMessageLoop(Int32 reason, ApplicationContext context)
+   at System.Windows.Forms.Application.Run(Form mainForm)
+   at Echoes.Program.Main(String[] args) in C:\Users\Abummoja\Downloads\echoesmaster(cs-musicplayer)\Program.cs:line 129

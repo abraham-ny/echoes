@@ -1,0 +1,64 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<config>
+  <general>
+    <volume>100</volume>
+    <hotkeyVolumeIncrement>0.03</hotkeyVolumeIncrement>
+    <hotkeyTransposeIncrement>0.5</hotkeyTransposeIncrement>
+    <hotkeysAllowed>True</hotkeysAllowed>
+    <autoAdvance>True</autoAdvance>
+    <autoShuffle>False</autoShuffle>
+    <trackChangePopup>False</trackChangePopup>
+    <saveTranspose>True</saveTranspose>
+    <showWaveform>False</showWaveform>
+    <repeat>1</repeat>
+    <normalize>False</normalize>
+    <visualisationStyle>4</visualisationStyle>
+    <visualfps>40</visualfps>
+    <midisf></midisf>
+    <font1 Style="0">Courier New</font1>
+    <font1Size>100</font1Size>
+    <font2 Style="0">Consolas</font2>
+    <suppressHotkeys>True</suppressHotkeys>
+    <converterSelectedBitrateIndex>0</converterSelectedBitrateIndex>
+    <reshuffleAfterListLoop>False</reshuffleAfterListLoop>
+  </general>
+  <colors>
+    <background>181818</background>
+    <controlBack>303030</controlBack>
+    <controlFore>96E6FF</controlFore>
+    <highlightBack>CCD7D9</highlightBack>
+    <highlightFore>313131</highlightFore>
+    <seekBarBack>484848</seekBarBack>
+    <seekBarFore>96E6FF</seekBarFore>
+    <volBarBack>484848</volBarBack>
+    <volBarFore>96E6FF</volBarFore>
+    <trackTitle>96E6FF</trackTitle>
+    <trackAlbum>FFFFFF</trackAlbum>
+    <trackArtist>CAFDFF</trackArtist>
+    <spectrum>96E6FF</spectrum>
+  </colors>
+  <hotkeys>
+    <ADVANCEPLAYER key="Right" ctrl="True" alt="False" shift="False" enabled="True" />
+    <PREVIOUSPLAYER key="Left" ctrl="True" alt="False" shift="False" enabled="True" />
+    <PLAYPAUSE key="Down" ctrl="True" alt="False" shift="False" enabled="True" />
+    <GLOBAL_VOLUMEUP key="Add" ctrl="True" alt="False" shift="False" enabled="True" />
+    <GLOBAL_VOLUMEDOWN key="Subtract" ctrl="True" alt="False" shift="False" enabled="True" />
+    <TRANSPOSEUP key="PageUp" ctrl="True" alt="False" shift="False" enabled="True" />
+    <TRANSPOSEDOWN key="Next" ctrl="True" alt="False" shift="False" enabled="True" />
+    <DELETE key="Delete" ctrl="True" alt="False" shift="False" enabled="False" />
+    <VOLUMEUP key="Home" ctrl="True" alt="False" shift="False" enabled="True" />
+    <VOLUMEDOWN key="End" ctrl="True" alt="False" shift="False" enabled="True" />
+    <NEXTLIST key="Right" ctrl="False" alt="False" shift="True" enabled="True" />
+    <PREVLIST key="Left" ctrl="False" alt="False" shift="True" enabled="True" />
+  </hotkeys>
+  <columns>
+    <num>35</num>
+    <title>250</title>
+    <artist>140</artist>
+    <length>60</length>
+    <album>155</album>
+    <listened>70</listened>
+    <filename>100</filename>
+    <bitrate>70</bitrate>
+  </columns>
+</config>
