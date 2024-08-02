@@ -4349,6 +4349,11 @@ namespace Echoes
             ChooseFile();
         }
 
+        private void donatePp_MenuItemClicked(object sender, EventArgs e)
+        {
+            //launch pay pal donation page in browser.
+        }
+
         public void LoadAudio(Track t)
         {
             showNotification("Loading...");

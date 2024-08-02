@@ -160,6 +160,12 @@
     <Compile Include="ModifiedRichTextBox.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="NewEqualizer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="NewEqualizer.Designer.cs">
+      <DependentUpon>NewEqualizer.cs</DependentUpon>
+    </Compile>
     <Compile Include="Options.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -217,6 +223,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Filter.resx">
       <DependentUpon>Filter.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NewEqualizer.resx">
+      <DependentUpon>NewEqualizer.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Options.resx">
       <DependentUpon>Options.cs</DependentUpon>
