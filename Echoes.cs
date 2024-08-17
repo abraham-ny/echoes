@@ -22,6 +22,7 @@ using Un4seen.Bass.AddOn.Midi;
 using Un4seen.Bass.AddOn.Flac;
 using Un4seen.Bass.AddOn.Wma;
 using Un4seen.Bass.AddOn.Mix;
+//using Un4seen.Bass.AddOn.Flac.
 
 namespace Echoes
 {
@@ -133,7 +134,7 @@ namespace Echoes
         public string configXmlFileLocation = Path.Combine(Path.GetDirectoryName(System.Reflection.Assembly.GetEntryAssembly().Location), "config.xml");
         public string lameExeLocation = Path.Combine(Path.GetDirectoryName(System.Reflection.Assembly.GetEntryAssembly().Location), "lame.exe");
         public string lameExeDownloadSite = "http://www.rarewares.org/mp3-lame-bundle.php";
-
+        //Un4seen.Bass.AddOn.Mix.BassMix.
         public XmlCacher xmlCacher;
 
         public int stream;
@@ -4352,6 +4353,11 @@ namespace Echoes
         private void donatePp_MenuItemClicked(object sender, EventArgs e)
         {
             //launch pay pal donation page in browser.
+        }
+
+        private void savePlist_Clicked(object sender, EventArgs e)
+        {
+            ExportPlaylist();
         }
 
         public void LoadAudio(Track t)

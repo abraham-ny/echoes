@@ -58,10 +58,8 @@ namespace Echoes
             this.helpProvider1 = new System.Windows.Forms.HelpProvider();
             this.menuBar = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.openPlaylistToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openAudioFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveCurrentPlaylistToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.recentFilesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -72,6 +70,8 @@ namespace Echoes
             this.changeLogToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.bugReportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.viewSourceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.donateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.payPalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.notificationStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.eqButton = new ModifiedControls.ModifiedButton();
@@ -79,8 +79,6 @@ namespace Echoes
             this.playlistSelectorCombo = new ModifiedControls.ModifiedComboBox();
             this.volumeBar = new ModifiedControls.ModifiedProgressBarVol();
             this.seekBar = new ModifiedControls.ModifiedProgressBarSeek();
-            this.donateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.payPalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.trackGrid)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.transposeChangerNum)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.fwdBtn)).BeginInit();
@@ -440,26 +438,19 @@ namespace Echoes
             // fileToolStripMenuItem
             // 
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.openPlaylistToolStripMenuItem,
             this.openAudioFileToolStripMenuItem,
             this.saveCurrentPlaylistToolStripMenuItem,
-            this.recentFilesToolStripMenuItem,
             this.exitToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
             this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
             this.fileToolStripMenuItem.Text = "File";
             // 
-            // openPlaylistToolStripMenuItem
-            // 
-            this.openPlaylistToolStripMenuItem.Name = "openPlaylistToolStripMenuItem";
-            this.openPlaylistToolStripMenuItem.Size = new System.Drawing.Size(181, 22);
-            this.openPlaylistToolStripMenuItem.Text = "Open Playlist";
-            // 
             // openAudioFileToolStripMenuItem
             // 
             this.openAudioFileToolStripMenuItem.Name = "openAudioFileToolStripMenuItem";
             this.openAudioFileToolStripMenuItem.Size = new System.Drawing.Size(181, 22);
-            this.openAudioFileToolStripMenuItem.Text = "Open Audio File(s)";
+            this.openAudioFileToolStripMenuItem.Text = "Open";
+            this.openAudioFileToolStripMenuItem.ToolTipText = "Playlist, Audio File or Midi";
             this.openAudioFileToolStripMenuItem.Click += new System.EventHandler(this.openAudioFile_MenuItemClicked);
             // 
             // saveCurrentPlaylistToolStripMenuItem
@@ -467,12 +458,7 @@ namespace Echoes
             this.saveCurrentPlaylistToolStripMenuItem.Name = "saveCurrentPlaylistToolStripMenuItem";
             this.saveCurrentPlaylistToolStripMenuItem.Size = new System.Drawing.Size(181, 22);
             this.saveCurrentPlaylistToolStripMenuItem.Text = "Save Current Playlist";
-            // 
-            // recentFilesToolStripMenuItem
-            // 
-            this.recentFilesToolStripMenuItem.Name = "recentFilesToolStripMenuItem";
-            this.recentFilesToolStripMenuItem.Size = new System.Drawing.Size(181, 22);
-            this.recentFilesToolStripMenuItem.Text = "Recent Files";
+            this.saveCurrentPlaylistToolStripMenuItem.Click += new System.EventHandler(this.savePlist_Clicked);
             // 
             // exitToolStripMenuItem
             // 
@@ -493,19 +479,19 @@ namespace Echoes
             // settingsToolStripMenuItem
             // 
             this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
-            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(121, 22);
             this.settingsToolStripMenuItem.Text = "Settings";
             // 
             // updateToolStripMenuItem
             // 
             this.updateToolStripMenuItem.Name = "updateToolStripMenuItem";
-            this.updateToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.updateToolStripMenuItem.Size = new System.Drawing.Size(121, 22);
             this.updateToolStripMenuItem.Text = "Update";
             // 
             // equalizerToolStripMenuItem
             // 
             this.equalizerToolStripMenuItem.Name = "equalizerToolStripMenuItem";
-            this.equalizerToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.equalizerToolStripMenuItem.Size = new System.Drawing.Size(121, 22);
             this.equalizerToolStripMenuItem.Text = "Equalizer";
             // 
             // helpToolStripMenuItem
@@ -522,26 +508,41 @@ namespace Echoes
             // aboutEchoesToolStripMenuItem
             // 
             this.aboutEchoesToolStripMenuItem.Name = "aboutEchoesToolStripMenuItem";
-            this.aboutEchoesToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.aboutEchoesToolStripMenuItem.Size = new System.Drawing.Size(147, 22);
             this.aboutEchoesToolStripMenuItem.Text = "About Echoes";
             // 
             // changeLogToolStripMenuItem
             // 
             this.changeLogToolStripMenuItem.Name = "changeLogToolStripMenuItem";
-            this.changeLogToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.changeLogToolStripMenuItem.Size = new System.Drawing.Size(147, 22);
             this.changeLogToolStripMenuItem.Text = "ChangeLog";
             // 
             // bugReportToolStripMenuItem
             // 
             this.bugReportToolStripMenuItem.Name = "bugReportToolStripMenuItem";
-            this.bugReportToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.bugReportToolStripMenuItem.Size = new System.Drawing.Size(147, 22);
             this.bugReportToolStripMenuItem.Text = "Bug Report";
             // 
             // viewSourceToolStripMenuItem
             // 
             this.viewSourceToolStripMenuItem.Name = "viewSourceToolStripMenuItem";
-            this.viewSourceToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.viewSourceToolStripMenuItem.Size = new System.Drawing.Size(147, 22);
             this.viewSourceToolStripMenuItem.Text = "View Source";
+            // 
+            // donateToolStripMenuItem
+            // 
+            this.donateToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.payPalToolStripMenuItem});
+            this.donateToolStripMenuItem.Name = "donateToolStripMenuItem";
+            this.donateToolStripMenuItem.Size = new System.Drawing.Size(57, 20);
+            this.donateToolStripMenuItem.Text = "Donate";
+            // 
+            // payPalToolStripMenuItem
+            // 
+            this.payPalToolStripMenuItem.Name = "payPalToolStripMenuItem";
+            this.payPalToolStripMenuItem.Size = new System.Drawing.Size(109, 22);
+            this.payPalToolStripMenuItem.Text = "PayPal";
+            this.payPalToolStripMenuItem.Click += new System.EventHandler(this.donatePp_MenuItemClicked);
             // 
             // statusStrip1
             // 
@@ -629,21 +630,6 @@ namespace Echoes
             this.seekBar.MouseDown += new System.Windows.Forms.MouseEventHandler(this.progressBar1_MouseDown);
             this.seekBar.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Form1_MouseMove);
             this.seekBar.MouseUp += new System.Windows.Forms.MouseEventHandler(this.Form1_MouseUp);
-            // 
-            // donateToolStripMenuItem
-            // 
-            this.donateToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.payPalToolStripMenuItem});
-            this.donateToolStripMenuItem.Name = "donateToolStripMenuItem";
-            this.donateToolStripMenuItem.Size = new System.Drawing.Size(57, 20);
-            this.donateToolStripMenuItem.Text = "Donate";
-            // 
-            // payPalToolStripMenuItem
-            // 
-            this.payPalToolStripMenuItem.Name = "payPalToolStripMenuItem";
-            this.payPalToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.payPalToolStripMenuItem.Text = "PayPal";
-            this.payPalToolStripMenuItem.Click += new System.EventHandler(this.donatePp_MenuItemClicked);
             // 
             // Echoes
             // 
@@ -749,10 +735,8 @@ namespace Echoes
         private HelpProvider helpProvider1;
         private MenuStrip menuBar;
         private ToolStripMenuItem fileToolStripMenuItem;
-        private ToolStripMenuItem openPlaylistToolStripMenuItem;
         private ToolStripMenuItem openAudioFileToolStripMenuItem;
         private ToolStripMenuItem saveCurrentPlaylistToolStripMenuItem;
-        private ToolStripMenuItem recentFilesToolStripMenuItem;
         private ToolStripMenuItem exitToolStripMenuItem;
         private ToolStripMenuItem optionsToolStripMenuItem;
         private ToolStripMenuItem settingsToolStripMenuItem;
