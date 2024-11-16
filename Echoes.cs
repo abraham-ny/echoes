@@ -4378,5 +4378,42 @@ namespace Echoes
                 loadTrackWorker.RunWorkerAsync();
             }
         }
+        [DllImport("shell32.dll")]
+        private static extern int SetCurrentExplicitAppUserModelID(string AppID);
+        private const int WM_COMMAND = 0x0111;
+        protected override void WndProc(ref Message m)
+        {
+            if(m.Msg == WM_COMMAND)
+            {
+                int btnId = m.WParam.ToInt32();
+                switch (btnId)
+                {
+                    case 0:
+                        //play
+                        break;
+                    case 1:
+                        //pause
+                        break;
+                    case 2:
+                        //next
+                        break;
+                    case 3:
+                        //prev
+                        break;
+                }
+            } base.WndProc(ref m);
+        }
+        private IntPtr LoadIconFromFile(string path)
+        {
+            using (var icon = new Icon(path))
+            {
+                return icon.Handle;
+            }
+        }
+        private void AddThumbBtns()
+        {
+            var taskBarList = (ITaskbarList3)new TaskBarList();
+            taskBarList.HrInit();
+        }
     }
 }
