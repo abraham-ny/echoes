@@ -273,6 +273,8 @@ namespace Echoes
             LoadPlaylistDb();
             StartupLoadProcedure();
             CheckAndCreateDefaultM3U();
+            SetCurrentExplicitAppUserModelID("Echoes.AB3M0E.TaskBarCont");
+            AddThumbBtns();
         }
 
         public List<string> GetAllAudioFiles(string dir)
@@ -4414,6 +4416,15 @@ namespace Echoes
         {
             var taskBarList = (ITaskbarList3)new TaskBarList();
             taskBarList.HrInit();
+            var tPlay = new THUMBBUTTON
+            {
+                dwMask = THUMBBUTTONMASK.THB_FLAGS | THUMBBUTTONMASK.THB_ICON | THUMBBUTTONMASK.THB_TOOLTIP,
+                iId = 0,
+                sZtip = "Play",
+                dwFlags = THUMBBUTTONFLAGS.THBF_ENABLED,
+                hIcon = Properties.Resources.prev.Handle
+            };
+            taskBarList.ThumbBarAddButtons(Handle, 1, new[] { tPlay });
         }
     }
 }

@@ -123,6 +123,7 @@
     <Compile Include="FloatingOSDWindow.cs" />
     <Compile Include="FloatingWindow.cs" />
     <Compile Include="HotkeyData.cs" />
+    <Compile Include="ITaskbarList3.cs" />
     <Compile Include="KeyboardHook.cs" />
     <Compile Include="EqualizerTrackbar.cs">
       <SubType>Component</SubType>
@@ -295,6 +296,11 @@
     <Content Include="Resources\echoesLogoWhiteDim.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Resources\next.ico" />
+    <Content Include="Resources\pause.ico" />
+    <Content Include="Resources\play.ico" />
+    <Content Include="Resources\prev.ico" />
+    <None Include="Resources\taskPrv.bmp" />
     <None Include="Resources\import3.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
