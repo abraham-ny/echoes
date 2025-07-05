@@ -273,8 +273,8 @@ namespace Echoes
             LoadPlaylistDb();
             StartupLoadProcedure();
             CheckAndCreateDefaultM3U();
-            SetCurrentExplicitAppUserModelID("Echoes.AB3M0E.TaskBarCont");
-            AddThumbBtns();
+            //SetCurrentExplicitAppUserModelID("Echoes.AB3M0E.TaskBarCont");
+            //AddThumbBtns();
         }
 
         public List<string> GetAllAudioFiles(string dir)
@@ -4383,11 +4383,11 @@ namespace Echoes
         [DllImport("shell32.dll")]
         private static extern int SetCurrentExplicitAppUserModelID(string AppID);
         private const int WM_COMMAND = 0x0111;
-        protected override void WndProc(ref Message m)
+        protected override void WndProc(ref Message msg)
         {
-            if(m.Msg == WM_COMMAND)
+            if (msg.Msg == WM_COMMAND)
             {
-                int btnId = m.WParam.ToInt32();
+                int btnId = msg.WParam.ToInt32();
                 switch (btnId)
                 {
                     case 0:
@@ -4403,7 +4403,7 @@ namespace Echoes
                         //prev
                         break;
                 }
-            } base.WndProc(ref m);
+            } base.WndProc(ref msg);
         }
         private IntPtr LoadIconFromFile(string path)
         {
@@ -4425,6 +4425,10 @@ namespace Echoes
                 hIcon = Properties.Resources.prev.Handle
             };
             taskBarList.ThumbBarAddButtons(Handle, 1, new[] { tPlay });
+        }
+        public void addThumbs()
+        {
+           //TO-DO: add thumb buttons to window preview
         }
     }
 }
