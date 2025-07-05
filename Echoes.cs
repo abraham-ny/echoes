@@ -210,7 +210,7 @@ namespace Echoes
         public DataGridViewCellStyle alternatingCellStyle = new DataGridViewCellStyle();
         public DataGridViewCellStyle highlightedCellStyle = new DataGridViewCellStyle();
 
-        //Abraham Moruri : abummoja3@gmail.com
+        //Copyright 2024 Abraham .M abraham.moruri1@gmail.com | abraham-ny:github.com
         string exeDir = AppDomain.CurrentDomain.BaseDirectory;
         string m3uPath;
         List<Track> foundTracks = new List<Track>();
@@ -233,6 +233,10 @@ namespace Echoes
             kh = new KeyboardHook();
             kh.Install();
             kh.KeyDown += kh_KeyDown;
+            openAudioFileToolStripMenuItem.ShortcutKeys = Keys.Control | Keys.O;
+            openAudioFileToolStripMenuItem.ShowShortcutKeys = true;
+            saveCurrentPlaylistToolStripMenuItem.ShortcutKeys = Keys.Control | Keys.S;
+            saveCurrentPlaylistToolStripMenuItem.ShowShortcutKeys = true;
 
             new ToolTip().SetToolTip(openBtn, "Open file");
             new ToolTip().SetToolTip(exportBtn, "Export playlist");
@@ -398,19 +402,47 @@ namespace Echoes
             }
             showNotification("EQ Removed");
         }
-
+        System.Windows.Forms.Timer nTimer;
+        bool isRunning;
         private void showNotification(String s)
         {
-            if (s != null)
+            if(s == null||isRunning)
             {
-                //notificationLabel.Text = s;
-                notificationStatusLabel.Text = s;
+                return;
             }
-            else
+            int timeLeft, totalDuration;
+            notificationStatusLabel.Text = s;
+            toolStripProgressBar1.Maximum = 30;
+            toolStripProgressBar1.Value = toolStripProgressBar1.Maximum;
+            toolStripProgressBar1.Visible = true;
+            isRunning = true;
+            if (nTimer != null)
             {
-                //notificationLabel.Text = "Notification Error";
-                notificationStatusLabel.Text = "Notification Error!";
+                nTimer.Stop();
+                nTimer.Dispose();
             }
+            timeLeft = toolStripProgressBar1.Maximum;
+            totalDuration = 30;
+            nTimer = new System.Windows.Forms.Timer();
+            nTimer.Interval = 100;//100ms
+            nTimer.Tick += (st, e) =>
+            {
+                timeLeft--;
+                if (timeLeft <= 0)
+                {
+                    nTimer.Stop();
+                    nTimer.Dispose();
+                    nTimer = null;
+                    notificationStatusLabel.Text = string.Empty;
+                    toolStripProgressBar1.Visible = false;
+                    isRunning = false;
+                }
+                else
+                {
+                    toolStripProgressBar1.Value = timeLeft;
+                }
+            };
+            nTimer.Start();
         }
         public void DefineEQ()
         {

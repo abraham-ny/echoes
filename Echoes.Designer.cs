@@ -74,6 +74,7 @@ namespace Echoes
             this.payPalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.notificationStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripProgressBar1 = new System.Windows.Forms.ToolStripProgressBar();
             this.eqButton = new ModifiedControls.ModifiedButton();
             this.saveButton = new ModifiedControls.ModifiedButton();
             this.playlistSelectorCombo = new ModifiedControls.ModifiedComboBox();
@@ -547,7 +548,8 @@ namespace Echoes
             // statusStrip1
             // 
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.notificationStatusLabel});
+            this.notificationStatusLabel,
+            this.toolStripProgressBar1});
             this.statusStrip1.Location = new System.Drawing.Point(0, 627);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Size = new System.Drawing.Size(1070, 22);
@@ -559,6 +561,11 @@ namespace Echoes
             this.notificationStatusLabel.Name = "notificationStatusLabel";
             this.notificationStatusLabel.Size = new System.Drawing.Size(57, 17);
             this.notificationStatusLabel.Text = "Waiting...";
+            // 
+            // toolStripProgressBar1
+            // 
+            this.toolStripProgressBar1.Name = "toolStripProgressBar1";
+            this.toolStripProgressBar1.Size = new System.Drawing.Size(100, 16);
             // 
             // eqButton
             // 
@@ -751,6 +758,7 @@ namespace Echoes
         private ToolStripStatusLabel notificationStatusLabel;
         private ToolStripMenuItem donateToolStripMenuItem;
         private ToolStripMenuItem payPalToolStripMenuItem;
+        private ToolStripProgressBar toolStripProgressBar1;
     }
 }
 
