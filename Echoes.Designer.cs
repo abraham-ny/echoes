@@ -62,16 +62,14 @@ namespace Echoes
             this.saveCurrentPlaylistToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.updateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.equalizerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.aboutEchoesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.viewHelpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.changeLogToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.bugReportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.viewSourceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.donateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.payPalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.aboutEchoesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.notificationStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripProgressBar1 = new System.Windows.Forms.ToolStripProgressBar();
@@ -428,8 +426,7 @@ namespace Echoes
             this.menuBar.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem,
             this.optionsToolStripMenuItem,
-            this.helpToolStripMenuItem,
-            this.donateToolStripMenuItem});
+            this.helpToolStripMenuItem});
             this.menuBar.Location = new System.Drawing.Point(0, 0);
             this.menuBar.Name = "menuBar";
             this.menuBar.Size = new System.Drawing.Size(1070, 24);
@@ -470,80 +467,72 @@ namespace Echoes
             // optionsToolStripMenuItem
             // 
             this.optionsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.settingsToolStripMenuItem,
             this.updateToolStripMenuItem,
-            this.equalizerToolStripMenuItem});
+            this.equalizerToolStripMenuItem,
+            this.settingsToolStripMenuItem});
             this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
-            this.optionsToolStripMenuItem.Size = new System.Drawing.Size(61, 20);
-            this.optionsToolStripMenuItem.Text = "Options";
-            // 
-            // settingsToolStripMenuItem
-            // 
-            this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
-            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(121, 22);
-            this.settingsToolStripMenuItem.Text = "Settings";
+            this.optionsToolStripMenuItem.Size = new System.Drawing.Size(39, 20);
+            this.optionsToolStripMenuItem.Text = "Edit";
             // 
             // updateToolStripMenuItem
             // 
             this.updateToolStripMenuItem.Name = "updateToolStripMenuItem";
-            this.updateToolStripMenuItem.Size = new System.Drawing.Size(121, 22);
-            this.updateToolStripMenuItem.Text = "Update";
+            this.updateToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.updateToolStripMenuItem.Text = "Check for Updates";
+            this.updateToolStripMenuItem.Click += new System.EventHandler(this.updateClick);
             // 
             // equalizerToolStripMenuItem
             // 
+            this.equalizerToolStripMenuItem.Enabled = false;
             this.equalizerToolStripMenuItem.Name = "equalizerToolStripMenuItem";
-            this.equalizerToolStripMenuItem.Size = new System.Drawing.Size(121, 22);
+            this.equalizerToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.equalizerToolStripMenuItem.Text = "Equalizer";
+            // 
+            // settingsToolStripMenuItem
+            // 
+            this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
+            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.settingsToolStripMenuItem.Text = "Settings";
+            this.settingsToolStripMenuItem.Click += new System.EventHandler(this.settingsMenuClick);
             // 
             // helpToolStripMenuItem
             // 
             this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.aboutEchoesToolStripMenuItem,
+            this.viewHelpToolStripMenuItem,
             this.changeLogToolStripMenuItem,
             this.bugReportToolStripMenuItem,
-            this.viewSourceToolStripMenuItem});
+            this.aboutEchoesToolStripMenuItem});
             this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
             this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
             this.helpToolStripMenuItem.Text = "Help";
             // 
-            // aboutEchoesToolStripMenuItem
+            // viewHelpToolStripMenuItem
             // 
-            this.aboutEchoesToolStripMenuItem.Name = "aboutEchoesToolStripMenuItem";
-            this.aboutEchoesToolStripMenuItem.Size = new System.Drawing.Size(147, 22);
-            this.aboutEchoesToolStripMenuItem.Text = "About Echoes";
+            this.viewHelpToolStripMenuItem.Name = "viewHelpToolStripMenuItem";
+            this.viewHelpToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.viewHelpToolStripMenuItem.Text = "View Help Online";
+            this.viewHelpToolStripMenuItem.Click += new System.EventHandler(this.helpClick);
             // 
             // changeLogToolStripMenuItem
             // 
             this.changeLogToolStripMenuItem.Name = "changeLogToolStripMenuItem";
-            this.changeLogToolStripMenuItem.Size = new System.Drawing.Size(147, 22);
-            this.changeLogToolStripMenuItem.Text = "ChangeLog";
+            this.changeLogToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.changeLogToolStripMenuItem.Text = "Donate";
+            this.changeLogToolStripMenuItem.Click += new System.EventHandler(this.donateClick);
             // 
             // bugReportToolStripMenuItem
             // 
             this.bugReportToolStripMenuItem.Name = "bugReportToolStripMenuItem";
-            this.bugReportToolStripMenuItem.Size = new System.Drawing.Size(147, 22);
-            this.bugReportToolStripMenuItem.Text = "Bug Report";
+            this.bugReportToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.bugReportToolStripMenuItem.Text = "Feedback";
+            this.bugReportToolStripMenuItem.Click += new System.EventHandler(this.feedbackClick);
             // 
-            // viewSourceToolStripMenuItem
+            // aboutEchoesToolStripMenuItem
             // 
-            this.viewSourceToolStripMenuItem.Name = "viewSourceToolStripMenuItem";
-            this.viewSourceToolStripMenuItem.Size = new System.Drawing.Size(147, 22);
-            this.viewSourceToolStripMenuItem.Text = "View Source";
-            // 
-            // donateToolStripMenuItem
-            // 
-            this.donateToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.payPalToolStripMenuItem});
-            this.donateToolStripMenuItem.Name = "donateToolStripMenuItem";
-            this.donateToolStripMenuItem.Size = new System.Drawing.Size(57, 20);
-            this.donateToolStripMenuItem.Text = "Donate";
-            // 
-            // payPalToolStripMenuItem
-            // 
-            this.payPalToolStripMenuItem.Name = "payPalToolStripMenuItem";
-            this.payPalToolStripMenuItem.Size = new System.Drawing.Size(109, 22);
-            this.payPalToolStripMenuItem.Text = "PayPal";
-            this.payPalToolStripMenuItem.Click += new System.EventHandler(this.donatePp_MenuItemClicked);
+            this.aboutEchoesToolStripMenuItem.Name = "aboutEchoesToolStripMenuItem";
+            this.aboutEchoesToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.aboutEchoesToolStripMenuItem.Text = "About";
+            this.aboutEchoesToolStripMenuItem.Click += new System.EventHandler(this.aboutClick);
             // 
             // statusStrip1
             // 
@@ -752,13 +741,11 @@ namespace Echoes
         private ToolStripMenuItem aboutEchoesToolStripMenuItem;
         private ToolStripMenuItem changeLogToolStripMenuItem;
         private ToolStripMenuItem bugReportToolStripMenuItem;
-        private ToolStripMenuItem viewSourceToolStripMenuItem;
         private ToolStripMenuItem equalizerToolStripMenuItem;
         private StatusStrip statusStrip1;
         private ToolStripStatusLabel notificationStatusLabel;
-        private ToolStripMenuItem donateToolStripMenuItem;
-        private ToolStripMenuItem payPalToolStripMenuItem;
         private ToolStripProgressBar toolStripProgressBar1;
+        private ToolStripMenuItem viewHelpToolStripMenuItem;
     }
 }
 

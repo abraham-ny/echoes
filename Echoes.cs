@@ -22,6 +22,7 @@ using Un4seen.Bass.AddOn.Midi;
 using Un4seen.Bass.AddOn.Flac;
 using Un4seen.Bass.AddOn.Wma;
 using Un4seen.Bass.AddOn.Mix;
+using System.Reflection;
 //using Un4seen.Bass.AddOn.Flac.
 
 namespace Echoes
@@ -978,7 +979,7 @@ namespace Echoes
 
         bool AskToQuitWorker()
         {
-            showNotification("Exit?");
+            //showNotification("Exit?");
             if (!tagsLoaderWorker.IsBusy) return true;
             if (MessageBox.Show("Tag loading in progress. Any loaded tags will not be saved if you quit. Do you wish to quit?", "Loading", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation) == DialogResult.No)
             {
@@ -1867,6 +1868,7 @@ namespace Echoes
 
         private void AddKnownPlaylist(string filename)
         {
+            showNotification("Adding Playlist " + filename);
             if (!knownPlaylists.Contains(filename))
             {
                 knownPlaylists.Add(filename);
@@ -2258,7 +2260,7 @@ namespace Echoes
 
         public bool InitMidi()
         {
-            showNotification("Initializing Midi...");
+            showNotification("Initializing Midi with soundfont...");
             //if (midiFonts != null) return true;
             if (!File.Exists(midiSfLocation))
             {
@@ -4458,6 +4460,62 @@ namespace Echoes
             };
             taskBarList.ThumbBarAddButtons(Handle, 1, new[] { tPlay });
         }
+
+        private void settingsMenuClick(object sender, EventArgs e)
+        {
+            ShowOptions();
+        }
+
+        private void helpClick(object sender, EventArgs e)
+        {
+            OpenUrl("https://github.com/abraham-ny/echoes");
+        }
+
+        private void OpenUrl(string v)
+        {
+            try
+            {
+                if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+                {
+                    Process.Start(new ProcessStartInfo("cmd", $"/c start {v}")
+                    {
+                        CreateNoWindow = true
+                    });
+                }
+                else if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
+                {
+                    Process.Start("xdg-open", v);
+                }
+                else if (RuntimeInformation.IsOSPlatform(OSPlatform.OSX))
+                {
+                    Process.Start("open", v);
+                }
+            }catch(Exception ex)
+            {
+                MessageBox.Show($"Failed to open browser for:\n{v}\n{ex.Message}", "Browser Error");
+            }
+        }
+
+        private void feedbackClick(object sender, EventArgs e)
+        {
+            OpenUrl("https://github.com/abraham-ny/echoes");
+        }
+
+        private void donateClick(object sender, EventArgs e)
+        {
+            OpenUrl("https://github.com/abraham-ny/echoes");
+        }
+
+        private void aboutClick(object sender, EventArgs e)
+        {
+            MessageBox.Show($"Echoes media player {Assembly.GetExecutingAssembly().GetName().Version} \n(c)2025 Abraham .M (abraham-ny :github", "About");
+        }
+
+        private void updateClick(object sender, EventArgs e)
+        {
+            MessageBox.Show("This feature will be available soon...");
+        }
+
         public void addThumbs()
         {
            //TO-DO: add thumb buttons to window preview
