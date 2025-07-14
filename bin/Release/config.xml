@@ -10,7 +10,7 @@
     <trackChangePopup>False</trackChangePopup>
     <saveTranspose>True</saveTranspose>
     <showWaveform>False</showWaveform>
-    <repeat>1</repeat>
+    <repeat>0</repeat>
     <normalize>False</normalize>
     <visualisationStyle>4</visualisationStyle>
     <visualfps>40</visualfps>
@@ -55,7 +55,7 @@
     <num>35</num>
     <title>250</title>
     <artist>140</artist>
-    <length>60</length>
+    <length>74</length>
     <album>155</album>
     <listened>70</listened>
     <filename>100</filename>
