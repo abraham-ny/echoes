@@ -477,7 +477,7 @@ namespace Echoes
             // updateToolStripMenuItem
             // 
             this.updateToolStripMenuItem.Name = "updateToolStripMenuItem";
-            this.updateToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.updateToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
             this.updateToolStripMenuItem.Text = "Check for Updates";
             this.updateToolStripMenuItem.Click += new System.EventHandler(this.updateClick);
             // 
@@ -485,13 +485,13 @@ namespace Echoes
             // 
             this.equalizerToolStripMenuItem.Enabled = false;
             this.equalizerToolStripMenuItem.Name = "equalizerToolStripMenuItem";
-            this.equalizerToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.equalizerToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
             this.equalizerToolStripMenuItem.Text = "Equalizer";
             // 
             // settingsToolStripMenuItem
             // 
             this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
-            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
             this.settingsToolStripMenuItem.Text = "Settings";
             this.settingsToolStripMenuItem.Click += new System.EventHandler(this.settingsMenuClick);
             // 
@@ -509,28 +509,28 @@ namespace Echoes
             // viewHelpToolStripMenuItem
             // 
             this.viewHelpToolStripMenuItem.Name = "viewHelpToolStripMenuItem";
-            this.viewHelpToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.viewHelpToolStripMenuItem.Size = new System.Drawing.Size(165, 22);
             this.viewHelpToolStripMenuItem.Text = "View Help Online";
             this.viewHelpToolStripMenuItem.Click += new System.EventHandler(this.helpClick);
             // 
             // changeLogToolStripMenuItem
             // 
             this.changeLogToolStripMenuItem.Name = "changeLogToolStripMenuItem";
-            this.changeLogToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.changeLogToolStripMenuItem.Size = new System.Drawing.Size(165, 22);
             this.changeLogToolStripMenuItem.Text = "Donate";
             this.changeLogToolStripMenuItem.Click += new System.EventHandler(this.donateClick);
             // 
             // bugReportToolStripMenuItem
             // 
             this.bugReportToolStripMenuItem.Name = "bugReportToolStripMenuItem";
-            this.bugReportToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.bugReportToolStripMenuItem.Size = new System.Drawing.Size(165, 22);
             this.bugReportToolStripMenuItem.Text = "Feedback";
             this.bugReportToolStripMenuItem.Click += new System.EventHandler(this.feedbackClick);
             // 
             // aboutEchoesToolStripMenuItem
             // 
             this.aboutEchoesToolStripMenuItem.Name = "aboutEchoesToolStripMenuItem";
-            this.aboutEchoesToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.aboutEchoesToolStripMenuItem.Size = new System.Drawing.Size(165, 22);
             this.aboutEchoesToolStripMenuItem.Text = "About";
             this.aboutEchoesToolStripMenuItem.Click += new System.EventHandler(this.aboutClick);
             // 
@@ -668,6 +668,7 @@ namespace Echoes
             this.Text = "Echoes";
             this.Activated += new System.EventHandler(this.Echoes_Enter);
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
+            this.Load += new System.EventHandler(this.Echoes_Load);
             this.DragDrop += new System.Windows.Forms.DragEventHandler(this.Echoes_DragDrop);
             this.DragEnter += new System.Windows.Forms.DragEventHandler(this.Echoes_DragEnter);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.Echoes_Paint);
