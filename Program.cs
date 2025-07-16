@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
 using System.Drawing;
+using Microsoft.WindowsAPICodePack.Taskbar;
 
 namespace Echoes
 {
@@ -123,10 +124,13 @@ namespace Echoes
                 }
                 
             }
+
+            TaskbarManager.Instance.ApplicationId = "Echoes";
+
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             //TO-DO: Add "new Ui" window and let user decide what to launch on this part. 'NewEchoes()' 
-            mainWindow = new Echoes();//launches the default echoes player.
+            mainWindow = new Echoes(args);//launches the default echoes player.
             Application.Run(mainWindow);
         }
     }

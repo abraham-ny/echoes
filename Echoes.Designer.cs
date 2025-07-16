@@ -669,6 +669,7 @@ namespace Echoes
             this.Activated += new System.EventHandler(this.Echoes_Enter);
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.Load += new System.EventHandler(this.Echoes_Load);
+            this.Shown += new System.EventHandler(this.Echoes_Shown);
             this.DragDrop += new System.Windows.Forms.DragEventHandler(this.Echoes_DragDrop);
             this.DragEnter += new System.Windows.Forms.DragEventHandler(this.Echoes_DragEnter);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.Echoes_Paint);

@@ -223,7 +223,7 @@ namespace Echoes
         readonly string[] COLUMN_HEADERS_ALLOWED_CUSTOM = { "Title", "Artist", "Length", "Album", "Year", "Genre", "Comment", "Bitrate", "Format" };
         #endregion
 
-        public Echoes()
+        public Echoes(string[] argss)
         {
             vs.MaxFrequencySpectrum = Utils.FFTFrequency2Index(19200, 2047, 44100);
             xmlCacher = new XmlCacher(tagsCacheLocation);
@@ -231,6 +231,10 @@ namespace Echoes
             xmlCacher.AddOrUpdate(trx);*/
 
             InitializeComponent();
+            if (argss.Contains("resume")) {
+                LoadCacheAsPlaylist();
+                PlayFirst();
+            }
 
             kh = new KeyboardHook();
             kh.Install();
@@ -923,6 +927,7 @@ namespace Echoes
                 else if (Path.GetExtension(file).ToLower() == ".m3u")
                 {
                     AddKnownPlaylist(file);
+                    JumpList.AddToRecent(Path.GetFullPath(file));
                     lastList = file;
                 }
             }
@@ -1039,6 +1044,7 @@ namespace Echoes
             {
                 LoadAudio(t); showNotification("Loading File: " + t.filename);
             }
+            JumpList.AddToRecent(Path.GetFullPath(t.filename));
         }
 
         void OpenFile(string filename)
@@ -2353,6 +2359,7 @@ namespace Echoes
                 ExportM3u(dlg.FileName.ToString(), new List<Track>());
                 return dlg.FileName.ToString();
             }
+            JumpList.AddToRecent(dlg.FileName);
             dlg.Dispose();
             return null;
         }
@@ -2371,6 +2378,7 @@ namespace Echoes
                 if (currentPlaylist != dlg.FileName.ToString())
                 {
                     playlistSelectorCombo.SelectedValue = currentPlaylist = dlg.FileName.ToString();
+                    JumpList.AddToRecent(dlg.FileName);
                 }
             }
             dlg.Dispose();
@@ -2379,7 +2387,7 @@ namespace Echoes
         private void ChooseFile()
         {
             OpenFileDialog dlg = new OpenFileDialog();
-            dlg.Title = "Open File";
+            dlg.Title = "Open File(s)";
             dlg.Filter = "Supported files|";
             dlg.Multiselect = true;
             foreach (string s in supportedAudioTypes)
@@ -4525,25 +4533,12 @@ namespace Echoes
         private void CreateJumpList()
         {
             var jumpList = JumpList.CreateJumpList();
-
-            // Custom Task: Resume Previous Playlist
             var resumeTask = new JumpListLink(Application.ExecutablePath, "Resume Previous List")
             {
+                //IconReference = ,
                 Arguments = "/resume"
             };
             jumpList.AddUserTasks(resumeTask);
-
-            // Add recent files manually (can also use system-managed recent items)
-            string[] recentTracks = { };// LoadRecentTracks(); // From your config or JSON
-            foreach (var path in recentTracks)
-            {
-                if (File.Exists(path))
-                {
-                    var item = new JumpListLink(path, Path.GetFileName(path));
-                    jumpList.AddUserTasks(item);
-                }
-            }
-
             jumpList.Refresh();
         }
         private ThumbnailToolBarButton btnPlayPause;
@@ -4594,15 +4589,16 @@ namespace Echoes
             }
         }
 
-        private void Echoes_Load(object sender, EventArgs e)
+        private void Echoes_Shown(object sender, EventArgs e)
         {
             InitTaskbarButtons();
+            CreateJumpList();
         }
 
-        public void addThumbs()
+        private void Echoes_Load(object sender, EventArgs e)
         {
-
-
+            //before shown
         }
+
     }
 }
