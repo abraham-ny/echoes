@@ -11,7 +11,7 @@
     <saveTranspose>True</saveTranspose>
     <showWaveform>False</showWaveform>
     <repeat>0</repeat>
-    <normalize>False</normalize>
+    <normalize>True</normalize>
     <visualisationStyle>4</visualisationStyle>
     <visualfps>40</visualfps>
     <midisf></midisf>
@@ -52,13 +52,14 @@
     <PREVLIST key="Left" ctrl="False" alt="False" shift="True" enabled="True" />
   </hotkeys>
   <columns>
-    <num>35</num>
-    <title>250</title>
+    <num>39</num>
+    <title>311</title>
     <artist>140</artist>
     <length>74</length>
-    <album>155</album>
     <listened>70</listened>
-    <filename>100</filename>
-    <bitrate>70</bitrate>
+    <comment>100</comment>
+    <size>100</size>
+    <trueBitrate>100</trueBitrate>
+    <format>100</format>
   </columns>
 </config>
